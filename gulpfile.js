@@ -11,7 +11,8 @@ var htmlhint = require("gulp-htmlhint"); // HTML валидатор
 //  css
 var sass = require('gulp-sass'),
   autoprefixer = require('gulp-autoprefixer'), // Автопрефиксер
-  uncss = require('gulp-uncss'); // анализирует HTML код и находит все неиспользуемые и продублированные стили.
+  uncss = require('gulp-uncss'), // анализирует HTML код и находит все неиспользуемые и продублированные стили.
+  csso = require('gulp-csso'); // отличный CSS минификатор
 
 
 //  js
@@ -19,40 +20,75 @@ var jshint = require('gulp-jshint'), // проверяе js
   fixmyjs = require("gulp-fixmyjs"), // исправляет js код после jshint
   uglify = require('gulp-uglify'); // сжимает js
 
+var src = {
+    html: "app/**/*.html",
+    scss: "app/scss/**/*.scss",
+    js: "app/js/**/*.js",
+    fonts: "app/fonts",
+    images: "app/images"
+  },
+  workingSrc = {
+    html: "app/",
+    css: "app/style",
+    js: "app/js"
+  },
+  endSrc = {
+    html: "dist/",
+    css: "dist/style",
+    js: "dist/js",
+    fonts: "dist/fonts",
+    images: "dist/images"
+  };
 
-gulp.task("endHTML", function () {
-  return gulp.src('app/**/*.html')
-    .pipe(htmlhint('.htmlhintrc'))
+gulp.task("checkHTML", function () {
+  return gulp.src(src.html)
+    .pipe(htmlhint())
+});
+gulp.task("endHTML", ["checkHTML"], function () {
+  return gulp.src(src.html)
+    .pipe(size())
+    .pipe(gulp.dest(endSrc.html))
 });
 
 gulp.task("scss", function () {
-  return gulp.src('app/scss/**/*.scss')
+  return gulp.src(src.scss)
     .pipe(sass())
+    .pipe(gulp.dest(endSrc.css))
     .pipe(autoprefixer({
       browsers: ['last 2 versions'],
       cascade: false
     }))
-    .pipe(gulp.dest('app/style'))
+    .pipe(gulp.dest(workingSrc.css))
+});
+gulp.task("workingOutSCSS", ["scss"], function () {
+  return gulp.src(workingSrc.css + "/**/*.css")
     .pipe(browserSync.reload({
       stream: true
     }))
 });
+gulp.task("endCSS", ["scss"], function () {
+  return gulp.src(workingSrc.css + "/**/*.css")
+    .pipe(csso({
+      restructure: true,
+      sourceMap: true,
+      debug: true
+    }))
+    .pipe(gulp.dest(endSrc.css))
+});
 
-gulp.task("endJS", function () {
-  return gulp.src('app/js/**/*.js')
+gulp.task("jshint", function () {
+  return gulp.src(src.js)
     .pipe(jshint())
+});
+gulp.task("workingOutJS", function () {
+  gulp.watch(src.js, ["jshint"])
+});
+gulp.task("endJS", ["jshint"], function () {
+  return gulp.src(src.js)
     .pipe(fixmyjs())
     .pipe(uglify())
-});
-
-gulp.task("checkScss", function () {
-  return gulp.src('app/style/**/*.css')
-    .pipe(uncss({
-      html: ['app/**/*.html']
-    }))
-    .pipe(size())
-    .pipe(gulp.dest('dest/'))
-});
+    .pipe(gulp.dest(endSrc.js))
+})
 
 gulp.task("browserSync", function () {
   browserSync({
@@ -63,7 +99,9 @@ gulp.task("browserSync", function () {
 });
 
 gulp.task("start", ['browserSync'], function () {
-  gulp.watch('app/scss/**/*.scss', ['scss']);
-  gulp.watch('app/*.html', browserSync.reload);
-  gulp.watch('app/js/**/*.js', browserSync.reload);
+  gulp.watch(src.scss, ['workingOutSCSS']);
+  gulp.watch(src.html, browserSync.reload);
+  gulp.watch(src.js, browserSync.reload);
 });
+
+gulp.task("endProject", ['endHTML', 'endCSS', 'endJS']);
