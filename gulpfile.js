@@ -40,16 +40,19 @@ var src = {
     images: "dist/images"
   };
 
+//   проверка html
 gulp.task("checkHTML", function () {
   return gulp.src(src.html)
     .pipe(htmlhint())
 });
+//  загрузка html в готовый проект
 gulp.task("endHTML", ["checkHTML"], function () {
   return gulp.src(src.html)
     .pipe(size())
     .pipe(gulp.dest(endSrc.html))
 });
 
+//  компиляция scss в css
 gulp.task("scss", function () {
   return gulp.src(src.scss)
     .pipe(sass())
@@ -60,12 +63,14 @@ gulp.task("scss", function () {
     }))
     .pipe(gulp.dest(workingSrc.css))
 });
+//  слежение за изменениями и вывод в браузер
 gulp.task("workingOutSCSS", ["scss"], function () {
   return gulp.src(workingSrc.css + "/**/*.css")
     .pipe(browserSync.reload({
       stream: true
     }))
 });
+//  загрузка css в готовый проект
 gulp.task("endCSS", ["scss"], function () {
   return gulp.src(workingSrc.css + "/**/*.css")
     .pipe(csso({
@@ -76,13 +81,16 @@ gulp.task("endCSS", ["scss"], function () {
     .pipe(gulp.dest(endSrc.css))
 });
 
+//  проверка js
 gulp.task("jshint", function () {
   return gulp.src(src.js)
     .pipe(jshint())
 });
+//  слежение за изменениями
 gulp.task("workingOutJS", function () {
   gulp.watch(src.js, ["jshint"])
 });
+//  загрузка js в готовый проект
 gulp.task("endJS", ["jshint"], function () {
   return gulp.src(src.js)
     .pipe(fixmyjs())
@@ -90,6 +98,7 @@ gulp.task("endJS", ["jshint"], function () {
     .pipe(gulp.dest(endSrc.js))
 })
 
+// работа browserSync
 gulp.task("browserSync", function () {
   browserSync({
     server: {
@@ -98,10 +107,12 @@ gulp.task("browserSync", function () {
   })
 });
 
+//  запуск работы
 gulp.task("start", ['browserSync'], function () {
   gulp.watch(src.scss, ['workingOutSCSS']);
   gulp.watch(src.html, browserSync.reload);
   gulp.watch(src.js, browserSync.reload);
 });
 
+// конечный вариант проекта
 gulp.task("endProject", ['endHTML', 'endCSS', 'endJS']);
