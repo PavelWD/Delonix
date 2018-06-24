@@ -56,3 +56,10 @@ $margin: 15px;
     margin: 0 auto;
   }
 }
+
+// Центрирование кнопок
+
+@mixin btn-center($height) {
+  height: $height;
+  line-height: $height;
+}

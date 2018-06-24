@@ -1,21 +1,30 @@
-.top-panel__logo img {
-  height: 100%;
-  width: auto;
-}
-.top-panel__telephone,
-.top-panel__call-time {
-  display: flex;
-  align-items: center;
+.phone-names, .call-time__content {
+  margin: 0 10px 0 5px;
   
+  color: $mainFont;
   text-transform: uppercase;
   
   @extend %bold-font;
 }
-.top-panel__call-time {
-  margin-left: 40px;
+.call-time__content {
+  margin: 0 0 0 10px;
+}
+.phone-link {
+  margin-left: 10px;
+  color: $mainFont;
+  text-transform: uppercase;
+  border-bottom: 1px dashed $mainFont;
+  
+  @extend %link-hover;
 }
 .call-us__icon {
-  font-size: 3em;
   color: $secondary;
+  font-size: 2.5em;
+  
   @extend %marg-r;
+}
+.call-us__social {
+  color: $mainFont;
+  
+  @extend %link-hover;
 }

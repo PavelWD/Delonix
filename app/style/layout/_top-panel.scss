@@ -1,22 +1,43 @@
 .top-panel {
   display: flex;
-  flex-wrap: nowrap;
-  align-content: center;
-  justify-content: space-between;
-  height: 90px;
-  
-  @extend %content-size;
-}
-.top-panel__logo {
-  display: block;
-  padding: 5px 0;
-  
-  @extend %marg-l;
-}
-.top-panel__call-us {
-  display: flex;
+  justify-content: space-around;
   align-content: center;
   align-items: center;
   
+  height: 110px;
+  
+  @extend %content-size;
+  
+  @include for-size(tablet-p) {
+    justify-content: space-between;
+  }
+}
+.top-panel__logo {
+  height: 100%;
+  padding: 5px 0;
+  
+  @extend %marg-l;
+  @extend %phone-hidden;
+}
+.top-panel__logo img {
+  height: 100%;
+  width: auto;
+}
+.top-panel__call-us {
+  display: flex;
+  
   @extend %marg-r;
+}
+.call-us__our-phone,
+.our-phone__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.call-us__call-time {
+  display: flex;
+  align-items: center;
+  margin-left: 60px;
+  
+  @extend %phone-hidden;
 }

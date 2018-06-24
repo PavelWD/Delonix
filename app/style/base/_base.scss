@@ -7,7 +7,7 @@ body {
 	line-height: 1.4;
 	
 	//размер шрифта, 4 значения, для экранов: до 599px, от 600, от 1200 и от 1800
-	@include font-size(12px, 12px, 14px, 15px);
+	@include font-size(14px, 14px, 16px, 18px);
 }
 
 //ширина страницы

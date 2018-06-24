@@ -12,6 +12,10 @@
       width: 1200px;
       margin: 0 auto; } }
 
+@media (max-width: 600px) {
+  .top-panel__logo, .call-us__call-time {
+    display: none !important; } }
+
 @font-face {
   font-family: 'font-awesome';
   src: url("../../fonts/fontAwesome/font/fontawesome-webfont.eot");
@@ -45,8 +49,7 @@
 	font-weight: normal;
 }
 */
-.top-panel__telephone,
-.top-panel__call-time {
+.phone-names, .call-time__content {
   font-family: oswald-bold, Arial, sans-serif;
   font-weight: bold; }
 
@@ -134,19 +137,19 @@ body {
   line-height: 1.4; }
   @media (max-width: 600px) {
     body {
-      font-size: 12px; } }
+      font-size: 14px; } }
   @media (min-width: 601px) {
     body {
-      font-size: 12px; } }
+      font-size: 14px; } }
   @media (min-width: 900px) {
     body {
-      font-size: 12px; } }
+      font-size: 14px; } }
   @media (min-width: 1200px) {
     body {
-      font-size: 14px; } }
+      font-size: 16px; } }
   @media (min-width: 1800px) {
     body {
-      font-size: 15px; } }
+      font-size: 18px; } }
 
 h1 {
   font-size: 2em;
@@ -235,50 +238,78 @@ del {
 mark {
   background: orange; }
 
+.phone-link:hover, .call-us__social:hover {
+  color: #da901a; }
+
 .top-panel {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  height: 90px; }
-
-.top-panel__logo {
-  display: block;
-  padding: 5px 0; }
-
-.top-panel__call-us {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
   -ms-flex-line-pack: center;
   align-content: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
-  align-items: center; }
+  align-items: center;
+  height: 110px; }
+  @media (min-width: 601px) {
+    .top-panel {
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between; } }
+
+.top-panel__logo {
+  height: 100%;
+  padding: 5px 0; }
 
 .top-panel__logo img {
   height: 100%;
   width: auto; }
 
-.top-panel__telephone,
-.top-panel__call-time {
+.top-panel__call-us {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+
+.call-us__our-phone,
+.our-phone__content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
+
+.call-us__call-time {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-left: 60px; }
+
+.phone-names, .call-time__content {
+  margin: 0 10px 0 5px;
+  color: #41516a;
   text-transform: uppercase; }
 
-.top-panel__call-time {
-  margin-left: 40px; }
+.call-time__content {
+  margin: 0 0 0 10px; }
+
+.phone-link {
+  margin-left: 10px;
+  color: #41516a;
+  text-transform: uppercase;
+  border-bottom: 1px dashed #41516a; }
 
 .call-us__icon {
-  font-size: 3em;
-  color: #da901a; }
+  color: #da901a;
+  font-size: 2.5em; }
+
+.call-us__social {
+  color: #41516a; }
