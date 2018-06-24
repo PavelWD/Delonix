@@ -1,0 +1,107 @@
+//отступы всех элементов
+$base_margin: 0 0 0 0;
+
+body {
+	background: white;
+	font-family: 'Tahoma', Arial, sans-serif;
+	line-height: 1.4;
+	
+	//размер шрифта, 4 значения, для экранов: до 599px, от 600, от 1200 и от 1800
+	@include font-size(12px, 12px, 14px, 15px);
+}
+
+//ширина страницы
+
+h1 {
+	font-size: 2em;
+	margin: $base_margin;
+}
+h2{
+	font-size: 1.8em;
+	margin: $base_margin;
+}
+h3{
+	font-size: 1.6em;
+	margin: $base_margin;
+}
+h4{
+	font-size: 1.4em;
+	margin: $base_margin;
+}
+h5{
+	font-size: 1.3em;
+	margin: $base_margin;
+}
+h6{
+	font-size: 1.2em;
+	margin: $base_margin;
+}
+p {
+	margin: $base_margin;
+}
+q {
+	font-style: italic;
+	
+	&:before {
+		content: '\00ab';
+	}
+	&:after {
+		content: '\00bb';
+	}
+}
+blockquote {
+	margin: $base_margin;
+	margin-left: 40px;
+	
+	&:before {
+		content: '\00ab';
+	}
+	&:after {
+		content: '\00bb';
+	}
+}
+a {
+	color: #487ebb;
+	text-decoration: none;
+	
+	&:hover {
+		color: #ff8001;
+    	text-decoration: none;
+	}
+}/*
+b {
+	
+}
+i {
+	
+}
+sub {
+	
+}
+sup {
+	
+}
+code {
+	
+}
+cite {
+	
+}*/
+pre {
+	margin: $base_margin;
+}
+address {
+	margin: $base_margin;
+}
+abbr {
+	border-bottom: 1px dotted black;
+}/*
+ins {
+	
+}
+del {
+	
+}*/
+mark {
+	background: orange;
+}

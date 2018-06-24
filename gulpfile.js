@@ -22,7 +22,7 @@ var jshint = require('gulp-jshint'), // проверяе js
 
 var src = {
     html: "app/**/*.html",
-    scss: "app/scss/**/*.scss",
+    scss: "app/style/**/*.scss",
     js: "app/js/**/*.js",
     fonts: "app/fonts",
     images: "app/images"
@@ -56,7 +56,6 @@ gulp.task("endHTML", ["checkHTML"], function () {
 gulp.task("scss", function () {
   return gulp.src(src.scss)
     .pipe(sass())
-    .pipe(gulp.dest(endSrc.css))
     .pipe(autoprefixer({
       browsers: ['last 2 versions'],
       cascade: false

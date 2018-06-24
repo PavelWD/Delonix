@@ -1,0 +1,21 @@
+.top-panel__logo img {
+  height: 100%;
+  width: auto;
+}
+.top-panel__telephone,
+.top-panel__call-time {
+  display: flex;
+  align-items: center;
+  
+  text-transform: uppercase;
+  
+  @extend %bold-font;
+}
+.top-panel__call-time {
+  margin-left: 40px;
+}
+.call-us__icon {
+  font-size: 3em;
+  color: $secondary;
+  @extend %marg-r;
+}

@@ -1,0 +1,58 @@
+//медиазапросы
+@mixin for-size($range) {
+  $phone-upper-boundary: 600px;
+  $tablet-portrait-upper-boundary: 900px;
+  $tablet-landscape-upper-boundary: 1200px;
+  $desktop-upper-boundary: 1800px;
+
+  @if $range == phone {
+    @media (max-width: #{$phone-upper-boundary}) { @content; }
+  } @else if $range == tablet-p {
+    @media (min-width: $phone-upper-boundary + 1) { @content; }
+  } @else if $range == tablet-l {
+    @media (min-width: $tablet-portrait-upper-boundary) { @content; }
+  } @else if $range == desktop {
+    @media (min-width: $tablet-landscape-upper-boundary) { @content; }
+  } @else if $range == big-desktop {
+    @media (min-width: $desktop-upper-boundary) { @content; }
+  }
+}
+
+//Размер шрифта на всех устройсвах
+@mixin font-size($phone-size, $table-p-size, $desktop-size, $big-desktop-size) {
+	@include for-size(phone) {font-size: $phone-size;}
+	@include for-size(tablet-p) {font-size: $table-p-size;}
+	@include for-size(tablet-l) {font-size: $table-p-size;}
+	@include for-size(desktop) {font-size: $desktop-size;}
+	@include for-size(big-desktop) {font-size: $big-desktop-size;}
+}
+
+//отступ елемента
+
+$margin: 15px;
+
+%marg-all {
+  margin: $margin;
+}
+%marg-l {
+  margin-left: $margin;
+}
+%marg-r {
+  margin-right: $margin;
+}
+%marg-t {
+  margin-top: $margin;
+}
+%marg-b {
+  margin-bottom: $margin;
+}
+
+// Ширина контента на больших экранах
+%content-size {
+  width: 100%;
+  
+  @include for-size(desktop) {
+    width: 1200px;
+    margin: 0 auto;
+  }
+}

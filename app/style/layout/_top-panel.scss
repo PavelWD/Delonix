@@ -1,0 +1,22 @@
+.top-panel {
+  display: flex;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-between;
+  height: 90px;
+  
+  @extend %content-size;
+}
+.top-panel__logo {
+  display: block;
+  padding: 5px 0;
+  
+  @extend %marg-l;
+}
+.top-panel__call-us {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  
+  @extend %marg-r;
+}

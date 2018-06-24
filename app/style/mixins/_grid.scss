@@ -1,0 +1,88 @@
+//Настройки
+
+$grid-col: 12;		//Количество колонок в сетке
+$grid-pad-size: 20px;		//Отступы в сетке
+
+//настройки ширины контента
+$phone-width: 100%;
+$tablet-width: 100%;
+$desktop-width: 1200px;
+$big-desktop-width: 1600px;
+
+%display-size {
+	@include for-size(phone) {width: $phone-width; margin: 0 auto;}
+	@include for-size(tablet-p) {width: $tablet-width; margin: 0 auto;}
+	@include for-size(tablet-l) {width: $tablet-width; margin: 0 auto;}
+	@include for-size(desktop) {width: $desktop-width; margin: 0 auto;}
+	@include for-size(big-desktop) {width: $big-desktop-width; margin: 0 auto;}
+};
+
+//clearfix
+%clearfix {&:after {content: "";display: table;clear: both;}};
+%grid {@extend %clearfix;};
+%grid-pad {
+	padding: 0 $grid-pad-size;
+	@extend %clearfix;
+};
+%grid-width {
+	@extend %clearfix;
+	@extend %display-size;
+};
+%grid-width-pad {
+	@extend %clearfix;
+	@extend %display-size;
+	padding: 0 $grid-pad-size;
+};
+
+//Сетка
+
+@include for-size(phone) {
+	@for $i from 1 through $grid-col {
+		%col-phone-#{$i} {
+			display: block;
+			width: ($i/$grid-col)*100%;
+			float:left;
+		}
+	}
+	%phone-hidden {display: none;}
+}
+@include for-size(tablet-p) {
+	@for $i from 1 through $grid-col {
+		%col-tablet-p-#{$i} {
+			display: block;
+			width: ($i/$grid-col)*100%;
+			float:left;
+		}
+	}
+	%tablet-p-hidden {display: none;}
+}
+@include for-size(tablet-l) {
+	@for $i from 1 through $grid-col {
+		%col-tablet-l-#{$i} {
+			display: block;
+			width: ($i/$grid-col)*100%;
+			float:left;
+		}
+	}
+	%tablet-l-hidden {display: none;}
+}
+@include for-size(desktop) {
+	@for $i from 1 through $grid-col {
+		%col-desktop-#{$i} {
+			display: block;
+			width: ($i/$grid-col)*100%;
+			float:left;
+		}
+	}
+	%desktop-hidden {display: none;}
+}
+@include for-size(big-desktop) {
+	@for $i from 1 through $grid-col {
+		%col-big-desktop-#{$i} {
+			display: block;
+			width: ($i/$grid-col)*100%;
+			float:left;
+		}
+	}
+	%big-desktop-hidden {display: none;}
+}
